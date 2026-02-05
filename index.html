@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #d63384;
+        }
+        .box {
+            background-color: #fff;
+            border: 3px solid #ff69b4;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            text-align: center;
+            position: relative;
+            width: 400px;
+            min-height: 300px;
+            overflow: hidden; /* Prevent buttons from escaping the box */
+        }
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #yes {
+            background-color: #ff69b4;
+            color: white;
+            transform-origin: center;
+        }
+        #yes:hover {
+            background-color: #ff1493;
+        }
+        #no {
+            background-color: #ffb6c1;
+            color: white;
+        }
+        #no:hover {
+            background-color: #ff69b4;
+        }
+        .popup {
+            display: none;
+            font-size: 2em;
+            color: #ff1493;
+            margin-top: 20px;
+        }
+        .popup img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="mainBox">
+        <h1 id="question"> 💖 Babesiee will you be my Valentine? 💖</h1>
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+        <div class="popup" id="popup">
+            💖 Yay! You are my Valentine, Babesieee ! ❤️<br>
+            <img src= "C:\Users\Halp123$\OneDrive\Desktop\VSG.jpeg" alt="Valentine's Image"> <!-- Replace with your image URL or path -->
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const question = document.getElementById('question');
+        const popup = document.getElementById('popup');
+        let scale = 1;  // Initial scale for the YES button
+
+        noButton.addEventListener('mouseover', () => {
+            // Grow the YES button each time NO is hovered
+            scale += 0.1;  // Increase scale by 0.1 each time
+            yesButton.style.transform = `scale(${scale})`;
+
+            // Move the NO button to a random position within the box
+            const box = document.getElementById('mainBox');
+            const boxRect = box.getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+
+            const maxX = boxRect.width - buttonRect.width - 20;  // Subtract padding
+            const maxY = boxRect.height - buttonRect.height - 20;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
+        });
+
+        yesButton.addEventListener('click', () => {
+            // Hide the question and buttons, show the popup in the same box
+            question.classList.add('hidden');
+            yesButton.classList.add('hidden');
+            noButton.classList.add('hidden');
+            popup.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
